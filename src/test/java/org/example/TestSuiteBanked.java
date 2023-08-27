@@ -1,9 +1,7 @@
 package org.example;
 
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 
 public class TestSuiteBanked extends BaseTest {
 
@@ -15,12 +13,12 @@ public class TestSuiteBanked extends BaseTest {
             home.selectCustomer();
             home.selectDropDownOptions();
             home.selectHostedCheckout();
-            PayFromPage payfrom = new PayFromPage();
-            payfrom.selectFromBankAccount();
+            PayFromPage payFrom = new PayFromPage();
+            payFrom.selectFromBankAccount();
             System.out.println("Test 1: Success Payment Scenario");
-            PayToPage payto = new PayToPage();
-            payto.selectToBankAccountSuccess();
-            BT.afterMethod();
+            PayToPage payTo = new PayToPage();
+            payTo.selectToBankAccountSuccess();
+//            BT.afterMethod();
         }
 
     @Test(priority =2)
@@ -31,11 +29,11 @@ public class TestSuiteBanked extends BaseTest {
         home.selectCustomer();
         home.selectDropDownOptions();
         home.selectHostedCheckout();
-        PayFromPage payfrom = new PayFromPage();
-        payfrom.selectFromBankAccount();
+        PayFromPage payFrom = new PayFromPage();
+        payFrom.selectFromBankAccount();
         System.out.println("Test 2: Delay in Payment Scenario");
-        PayToPage payto = new PayToPage();
-        payto.selectToBankAccountDelay();
+        PayToPage payTo = new PayToPage();
+        payTo.selectToBankAccountDelay();
     }
 
     @Test(priority =3)
@@ -46,12 +44,12 @@ public class TestSuiteBanked extends BaseTest {
         home.selectCustomer();
         home.selectDropDownOptions();
         home.selectHostedCheckout();
-        PayFromPage payfrom = new PayFromPage();
-        payfrom.selectFromBankAccount();
+        PayFromPage payFrom = new PayFromPage();
+        payFrom.selectFromBankAccount();
         System.out.println("Test 3: Fail Payment Scenario");
-        PayToPage payto = new PayToPage();
-        payto.selectToBankAccountFail();
-        BT.afterMethod();
+        PayToPage payTo = new PayToPage();
+        payTo.selectToBankAccountFail();
+//        BT.afterMethod();
     }
 
     @Test(priority =4)
@@ -62,11 +60,11 @@ public class TestSuiteBanked extends BaseTest {
         home.selectCustomer();
         home.selectDropDownOptions();
         home.selectHostedCheckout();
-        PayFromPage payfrom = new PayFromPage();
-        payfrom.selectFromBankAccount();
+        PayFromPage payFrom = new PayFromPage();
+        payFrom.selectFromBankAccount();
         System.out.println("Test 4: Fail Payment Scenario");
-        PayToPage payto = new PayToPage();
-        payto.selectToBankAccountInsufFunds();
+        PayToPage payTo = new PayToPage();
+        payTo.selectToBankAccountInsufFunds();
     }
 
 

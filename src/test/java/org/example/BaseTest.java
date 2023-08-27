@@ -60,7 +60,7 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-    @AfterTest
+    @AfterMethod
     public void afterMethod()
     {
         driver.close();

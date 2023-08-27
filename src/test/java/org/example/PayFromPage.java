@@ -3,7 +3,6 @@ package org.example;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 
 public class PayFromPage extends BaseTest {
 

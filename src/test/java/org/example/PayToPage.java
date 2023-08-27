@@ -2,13 +2,8 @@ package org.example;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 public class PayToPage extends BaseTest {
         public void selectToBankAccountSuccess() throws InterruptedException {
@@ -18,7 +13,9 @@ public class PayToPage extends BaseTest {
         driver.findElement(By.id(loc.getProperty("payTo.accountNumber_txt"))).sendKeys(prop.getProperty("ACCOUNT_NUMBER"));
         Thread.sleep(10000);
         driver.findElement(By.xpath(loc.getProperty("payTo.continue_button"))).click();
-        Assert.assertEquals(driver.findElement(By.xpath("//p[contains(text(),'Payment complete')]")).getText(), "Payment complete");
+        Assert.assertEquals(driver.findElement(By.xpath(loc.getProperty("assertPaymentSuccess"))).getText(), "Payment complete");
+        System.out.println(driver.findElement(By.xpath(loc.getProperty("assertPaymentSuccess"))).getText());
+
         }
 
 
@@ -30,12 +27,12 @@ public class PayToPage extends BaseTest {
                 Thread.sleep(10000);
                 driver.findElement(By.xpath(loc.getProperty("payTo.continue_button"))).click();
                 long startTime = System.currentTimeMillis();
-                System.out.println("Start payment time in seconds:" + startTime/ 1000);
+                System.out.println("Start payment time in seconds:" + startTime/1000);
                 Assert.assertEquals(driver.findElement(By.xpath("//p[contains(text(),'Payment complete')]")).getText(), "Payment complete");
                 long endTime = System.currentTimeMillis();
-                System.out.println("End payment time in seconds:" + endTime/ 1000);
+                System.out.println("End payment time in seconds:" + endTime/1000);
                 long responseTimeInMillis = endTime - startTime;
-                long responseTimeInSeconds = responseTimeInMillis / 1000;
+                long responseTimeInSeconds = responseTimeInMillis/1000;
                 System.out.println("Total time in seconds:" + responseTimeInSeconds);
                 long expectedMaxResponseTimeInSeconds = 10;
                 try {
@@ -47,13 +44,7 @@ public class PayToPage extends BaseTest {
                 }
                 catch (AssertionError assertionError) {
                         System.out.println("Assertion failed: " + assertionError.getMessage());
-                } finally {
-                        if (driver != null) {
-                                driver.quit();
-                        }
                 }
-
-
         }
 
         public void selectToBankAccountFail() throws InterruptedException {
@@ -63,7 +54,8 @@ public class PayToPage extends BaseTest {
                 driver.findElement(By.id(loc.getProperty("payTo.accountNumber_txt"))).sendKeys(prop.getProperty("ACCOUNT_NUMBER3"));
                 Thread.sleep(10000);
                 driver.findElement(By.xpath(loc.getProperty("payTo.continue_button"))).click();
-                Assert.assertEquals(driver.findElement(By.xpath("//p[contains(text(),'Payment Failed')]")).getText(), "Payment Failed");
+                Assert.assertEquals(driver.findElement(By.xpath(loc.getProperty("assertPaymentFail"))).getText(), "Payment Failed");
+                System.out.println(driver.findElement(By.xpath(loc.getProperty("assertPaymentFail"))).getText());
 
         }
 
@@ -74,22 +66,8 @@ public class PayToPage extends BaseTest {
                 driver.findElement(By.id(loc.getProperty("payTo.accountNumber_txt"))).sendKeys(prop.getProperty("ACCOUNT_NUMBER4"));
                 Thread.sleep(10000);
                 driver.findElement(By.xpath(loc.getProperty("payTo.continue_button"))).click();
-                Assert.assertEquals(driver.findElement(By.xpath("//p[contains(text(),'Insufficient funds')]")).getText(), "Insufficient funds");
-
+                Assert.assertEquals(driver.findElement(By.xpath(loc.getProperty("assertInsufficientFunds"))).getText(), "Insufficient funds");
+                System.out.println(driver.findElement(By.xpath(loc.getProperty("assertInsufficientFunds"))).getText());
         }
-
-
-
-//         @DataProvider(name="banked")
-//        public Object[][] testData()
-//        {
-//            return new Object[][]
-//                    {
-//                    {"xxxx","123"},
-//                            {"yyyy","123"}
-//
-//                    };
-//        }
-
 
 }
